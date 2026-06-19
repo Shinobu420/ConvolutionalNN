@@ -1,6 +1,6 @@
 import torch
 from PIL import Image
-from convolutionalNN import neuralNetwork, transformData
+from convolutionalNN import NeuralNetwork, transform_data
 
 #amd specific
 torch.set_float32_matmul_precision('high')
@@ -10,7 +10,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 def predict_image(image_path, model):
     img = Image.open(image_path).convert("RGB")
-    img_tensor = transformData(img).unsqueeze(0).to(device)
+    img_tensor = transform_data(img).unsqueeze(0).to(device)
     with torch.no_grad():
         output = model(img_tensor)
     prediction_index = torch.argmax(output, dim=1).item()
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     print(f"Using {device} device")
 
     # 1. Load model
-    model = neuralNetwork().to(device)
+    model = NeuralNetwork().to(device)
     model.load_state_dict(torch.load("cat_dog_model.pth", map_location=device))
     model.eval()
 

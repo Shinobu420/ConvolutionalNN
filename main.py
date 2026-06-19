@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import datasets
-from convolutionalNN import neuralNetwork, transformData
+from convolutionalNN import NeuralNetwork, transform_data
 
 #amd specific
 torch.set_float32_matmul_precision('high')
@@ -13,11 +13,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 ## code runs only in the main process
 if __name__ == "__main__":
     print(f"Using {device} device")
-    dataset = datasets.ImageFolder(root='../PetImages', transform=transformData)
+    dataset = datasets.ImageFolder(root='../PetImages', transform=transform_data)
     dataset_loader= DataLoader(dataset, batch_size=512, shuffle=True, num_workers=6, pin_memory=True)
 
     ## start compilation
-    model = neuralNetwork().to(device)
+    model = NeuralNetwork().to(device)
     optimized_model = torch.compile(model)
     ## end compilation
 

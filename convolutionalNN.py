@@ -2,13 +2,13 @@ import torch
 from torch import nn
 from torchvision.transforms import v2
 
-transformData = v2.Compose([
+transform_data = v2.Compose([
     v2.Resize((64, 64)),
     v2.ToImage(),
     v2.ToDtype(torch.float32, scale=True)
 ])
 
-class neuralNetwork(nn.Module):
+class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
         # image is no longer flattened
