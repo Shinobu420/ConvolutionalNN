@@ -8,6 +8,7 @@ transform_data = v2.Compose([
     v2.ToDtype(torch.float32, scale=True)
 ])
 
+
 class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
@@ -22,7 +23,7 @@ class NeuralNetwork(nn.Module):
             # halves size to 32x32, 32 channels
             nn.MaxPool2d(kernel_size=2, stride=2),
             # block 2, input is 32x32 from MaxPool2d
-            nn.Conv2d(in_channels=32,out_channels=64,kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1),
             # output: 32x32, 64 channels
             nn.ReLU(),
             # halves size to 16x16, 64 channels
@@ -33,10 +34,10 @@ class NeuralNetwork(nn.Module):
 
         self.classifier = nn.Sequential(
             # input features, 128 hidden features
-            nn.Linear(64*16*16,128),
+            nn.Linear(64 * 16 * 16, 128),
             nn.ReLU(),
             # output layer, 2 classes (cat, dog)
-            nn.Linear(128,2)
+            nn.Linear(128, 2)
         )
 
     def forward(self, x):
