@@ -1,6 +1,6 @@
 import torch
 from PIL import Image
-from convolutionalNN import NeuralNetwork, transform_data
+from convolutional_nn import NeuralNetwork, transform_data
 
 #amd specific
 torch.set_float32_matmul_precision('high')
