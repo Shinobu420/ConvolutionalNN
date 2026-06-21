@@ -2,7 +2,7 @@ import torch
 from PIL import Image
 from convolutional_nn import NeuralNetwork, transform_data
 
-#amd specific
+# AMD specific
 torch.set_float32_matmul_precision('high')
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
